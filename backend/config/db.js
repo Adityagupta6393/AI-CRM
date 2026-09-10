@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
-import {databaseName} from "./constants.js";
 
 const connectDB = async () => {
-    const url = `${process.env.MONGO_URI}/${databaseName}`;
+    const url = `${process.env.MONGO_URI}`;
 
     if(!url) {
         throw new Error("MONGO_URI is not defined in the environment variables");

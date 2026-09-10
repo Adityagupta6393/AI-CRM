@@ -1,1 +1,1 @@
-export const databaseName = "AI-CRM";
+export const databaseName = "ai-crm";

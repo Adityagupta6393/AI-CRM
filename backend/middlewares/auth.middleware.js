@@ -1,8 +1,9 @@
-import { ApiError } from "../utils/ApiError";
-import { asynchandler } from "../utils/asyncHandler";
+import { ApiError } from "../utils/ApiError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 import User from "../models/User.js"
+import jwt from "jsonwebtoken";
 
-export const protech = asynchandler(async(req, res, next) => {
+export const protect = asyncHandler(async(req, res, next) => {
     let token;
     const header = req.headers.authorization;
 
@@ -18,11 +19,12 @@ export const protech = asynchandler(async(req, res, next) => {
 
     try{
         decoded = jwt.verify(token, process.env.JWT_SECRET);
+        
     }catch{
         throw new ApiError(401, "Not authorized, token expired or invalid");
     }
 
-    const user = User.findById(decoded.id);
+    const user = await User.findById(decoded.id);
 
     if(!user){
         throw new ApiError(401, "Not authorized, user no longer exists");
