@@ -46,13 +46,13 @@ const leadSchema = new mongoose.Schema({
     priority : {
         type : String,
         enum : LEAD_PRIORITIES,
-        default : "medium"
+        default : "Medium"
     },
 
     source : {
         type : String,
         enum : [ "Website", "Referral", "Cold Outreach", "Social", "Event", "Other"],
-        default : "other"
+        default : "Other"
     },
 
     value : {
